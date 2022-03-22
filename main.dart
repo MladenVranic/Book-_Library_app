@@ -43,6 +43,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
      //colors
   static const primaryColor = Color.fromARGB(80, 155, 0, 0);
+  int _selectedItem = 0; //item counter
+
+
+
+  //methods
+  //method to change the current index in the Widget List
+  void changeItem(int index){
+    setState(() {
+      _selectedItem = index;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,70 +64,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        leading: Builder(
-          builder: (BuildContext context){
-            return IconButton(
-              onPressed: () => Scaffold.of(context).openDrawer(), //method which opens Drawer
-              icon: const Icon(Icons.menu),
-            );
-          },
-        ),
         title: Text(widget.title),
       ),
-      drawer: Drawer( //Drawer is for navigation of app
-        child: ListView(
-          children: <Widget>[//Array of child elements
-              Container(
-                height: 80.0,
-                child: const DrawerHeader(
-                decoration: BoxDecoration(
-                color: primaryColor,
-              ),
-              child: Align(
-                alignment: Alignment.center,
-                child:Text(
-                'Menü',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
-          ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: null,
-              child: const Text('Home')
-              ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: null,
-              child: const Text('Kategorien'),
-              ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: null,
-              child: const Text('Archiv'))
-          ],
-        )
-      ),
-      body: Center(
+      body: Center(//body content begins here
         child: Align(
             alignment: Alignment.topCenter,
+        child: Padding( //this Padding is for the entire container to be scaled
+          padding: EdgeInsets.all(10.0),
         child: Container(
           height: 150.0,
-        child: Card(
+        child: Card( //this card widget is in the parent container
           child: Align(
             alignment: Alignment.center,
           child: Column(
-            children: <Widget>[
+            children: <Widget>[ //array of child widgets within the whole container
                Container(
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
@@ -129,15 +92,71 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Align (
                         alignment: Alignment.centerLeft,
                       child: Text('Icon'),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index){ //navigate to specific index route
+          switch(index){
+            //category Route
+            case 2 :{
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CategoryRoute()),
+              );
+            } break;
+            //home Route
+            case 0: {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+              } break;
+            }
+        },
+        backgroundColor: primaryColor,
+        items: const <BottomNavigationBarItem> [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.inventory_outlined),
+            label: 'archive'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_outlined),
+            label: 'Kategorien',
+          ),
+        ],
+        currentIndex: _selectedItem,
+        selectedItemColor: Colors.teal[400],
+      ),
+    );
+  }
+}
+
+
+//category route
+class CategoryRoute extends StatelessWidget {
+  const CategoryRoute({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+        child: const Text('back'),
+        onPressed: (){
+          Navigator.pop(context);
+        },
       ),
     );
   }
