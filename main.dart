@@ -1,14 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-
 
   // This widget is the root of your application.
   @override
@@ -107,6 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: (int index){ //navigate to specific index route
           switch(index){
             //category Route
+            case 1 :{
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ArchiveRoute()),
+              );
+            }break;
             case 2 :{
               Navigator.push(
                 context,
@@ -148,6 +153,23 @@ class _MyHomePageState extends State<MyHomePage> {
 //category route
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ElevatedButton(
+        child: const Text('back'),
+        onPressed: (){
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+}
+
+//archive route
+class ArchiveRoute extends StatelessWidget {
+  const ArchiveRoute({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,27 @@
+#Smart library App
+
+-   Eine App, die es Lesern vereinfacht, sich für ein Buch zu entscheiden.
+    Der Enduser hat die Möglichkeit in vielen verschiedenen Kategorien der Literatur zu stöbern.
+    Auf der Startseite werden jeden Monat aus allen Kategorien die beliebtesten Bücher angezeigt.
+    Der Enduser hat die Möglichkeit, Bücher als favorit zu markieren, die dann wiederum im einer
+    seperaten favoritenliste aufrufbar sind. Des weiteren hat der Enduser die Möglichkeit bereits
+    gelesene Bücher zu archivieren( um einen Überblick zu haben). Der Enduser kann bücher auch bewerten,
+    sodass andere Leser sehen , ob ein Buch eine gute oder schlechte Bewertung hat.
+
+
+#Application Scaffold
+
+-   Navigation mit Titel
+-   footer mit navigations Menü ( Kategorien, Archiv, favoriten)
+
+
+#Home route
+
+-   10 beliebtesten Bücher des Monats
+
+#category route
+
+-   Display all categories
+
+
+#Database - Firebase
